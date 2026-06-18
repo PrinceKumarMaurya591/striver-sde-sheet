@@ -12,6 +12,9 @@
 - [Arrays — Part 4](#arrays---part-4)
 - [Greedy Algorithms](#greedy-algorithms)
 - [Heap / Priority Queue](#heap--priority-queue)
+- [Strings — Part 1](#strings--part-1)
+- [Strings — Part 2](#strings--part-2)
+- [Binary Search](#binary-search)
 
 ---
 
@@ -295,6 +298,188 @@
 
 ---
 
+---
+
+## Strings — Part 1
+
+### 22. Reverse Words in a String
+
+| File | Time | Space |
+|------|------|-------|
+| [`ReverseWords.java`](Strings/ReverseWords.java) | O(n) | O(n) |
+
+**Tell the interviewer:** "I'll reverse the entire string first, then reverse each individual word to restore the correct character order. Finally, I'll clean up extra spaces using a two-pointer technique. This approach works in-place on a character array."
+
+### 23. Longest Palindromic Substring
+
+| File | Time | Space |
+|------|------|-------|
+| [`LongestPalindromicSubstring.java`](Strings/LongestPalindromicSubstring.java) | O(n²) | O(1) |
+
+**Tell the interviewer:** "I'll use the **expand-around-center** approach. There are 2n-1 possible centers (n single characters and n-1 gaps). For each center, I'll expand outward while characters match. I'll keep track of the start and end of the longest palindrome. This is more space-efficient than DP."
+
+### 24. Roman to Integer
+
+| File | Time | Space |
+|------|------|-------|
+| [`RomanToInteger.java`](Strings/RomanToInteger.java) | O(n) | O(1) |
+
+**Tell the interviewer:** "I'll use a HashMap to store Roman character values. I'll iterate left to right. If the current value is less than the next value, I'll subtract it (this handles subtractive combinations like IV, IX). Otherwise, I'll add it to the result."
+
+### 25. Integer to Roman
+
+| File | Time | Space |
+|------|------|-------|
+| [`IntegerToRoman.java`](Strings/IntegerToRoman.java) | O(1) | O(1) |
+
+**Tell the interviewer:** "I'll use two arrays — one for values and one for corresponding symbols, including subtractive combinations like CM, CD, XC, etc. I'll iterate through the values in descending order, repeatedly appending the symbol and subtracting the value from the number."
+
+### 26. String to Integer (Atoi)
+
+| File | Time | Space |
+|------|------|-------|
+| [`Atoi.java`](Strings/Atoi.java) | O(n) | O(1) |
+
+**Tell the interviewer:** "I'll skip leading whitespace, check for an optional sign, then parse digits one by one. At each step, I'll check for overflow by comparing against `Integer.MAX_VALUE / 10` before adding the next digit. On overflow, I'll return the clamped value."
+
+### 27. Longest Common Prefix
+
+| File | Time | Space |
+|------|------|-------|
+| [`LongestCommonPrefix.java`](Strings/LongestCommonPrefix.java) | O(S) | O(1) |
+
+**Tell the interviewer:** "I'll start with the first string as the prefix. For each subsequent string, I'll keep shortening the prefix until it matches the start of that string. If the prefix becomes empty at any point, I'll return an empty string immediately."
+
+---
+
+## Strings — Part 2
+
+### 28. Z-Function (Pattern Matching)
+
+| File | Time | Space |
+|------|------|-------|
+| [`ZFunction.java`](Strings2/ZFunction.java) | O(n + m) | O(n + m) |
+
+**Tell the interviewer:** "I'll create a concatenated string `pattern + '$' + text` and compute the Z-array, where Z[i] is the length of the longest substring starting at i that matches the prefix. If Z[i] equals the pattern length after the delimiter, we've found a match at that position."
+
+### 29. KMP Algorithm (Pattern Matching)
+
+| File | Time | Space |
+|------|------|-------|
+| [`KMP.java`](Strings2/KMP.java) | O(n + m) | O(m) |
+
+**Tell the interviewer:** "I'll preprocess the pattern to compute the **LPS array** (Longest Proper Prefix which is also a Suffix). When a mismatch occurs, instead of starting over, I'll use the LPS array to skip characters in the pattern. This avoids redundant comparisons and gives linear time."
+
+### 30. Minimum Characters to Make Palindrome
+
+| File | Time | Space |
+|------|------|-------|
+| [`MinCharsForPalindrome.java`](Strings2/MinCharsForPalindrome.java) | O(n) | O(n) |
+
+**Tell the interviewer:** "I'll create a concatenated string `s + '$' + reverse(s)` and compute the LPS array using the KMP algorithm. The last value in the LPS array gives the longest prefix of s that is also a palindrome. The answer is `n - LPS[last]`."
+
+### 31. Check if String is Rotation of Another
+
+| File | Time | Space |
+|------|------|-------|
+| [`RotationCheck.java`](Strings2/RotationCheck.java) | O(n) | O(n) |
+
+**Tell the interviewer:** "If s2 is a rotation of s1, then s2 must be a substring of `s1 + s1`. I'll first check that lengths are equal, then check if s2 is contained in the concatenated string."
+
+### 32. Compare Version Numbers
+
+| File | Time | Space |
+|------|------|-------|
+| [`CompareVersion.java`](Strings2/CompareVersion.java) | O(n + m) | O(1) |
+
+**Tell the interviewer:** "I'll use two pointers to parse version segments separated by dots. For each segment, I'll build the integer value (ignoring leading zeros). I'll compare corresponding segments and return -1, 0, or 1 based on the comparison."
+
+### 33. Repeated String Match
+
+| File | Time | Space |
+|------|------|-------|
+| [`RepeatedStringMatch.java`](Strings2/RepeatedStringMatch.java) | O(n + m) | O(m) |
+
+**Tell the interviewer:** "I'll repeat string a at most `len(b)/len(a) + 2` times. After each repetition, I'll check if b is a substring. If found, I'll return the number of repetitions. If not found after the maximum, it's impossible."
+
+---
+
+## Binary Search
+
+### 34. Search in Rotated Sorted Array
+
+| File | Time | Space |
+|------|------|-------|
+| [`SearchRotatedSortedArray.java`](BinarySearch/SearchRotatedSortedArray.java) | O(log n) | O(1) |
+
+**Tell the interviewer:** "I'll use modified binary search. At each step, at least one half is sorted. I'll check which half is sorted by comparing `nums[left]` with `nums[mid]`. Then I'll determine if the target lies in that sorted half and adjust the search range accordingly."
+
+### 35. First and Last Position of Element in Sorted Array
+
+| File | Time | Space |
+|------|------|-------|
+| [`FirstLastPosition.java`](BinarySearch/FirstLastPosition.java) | O(log n) | O(1) |
+
+**Tell the interviewer:** "I'll perform two separate binary searches. For the first occurrence, when I find the target, I'll continue searching in the left half. For the last occurrence, I'll continue searching in the right half. This gives both boundaries in O(log n)."
+
+### 36. Find Peak Element
+
+| File | Time | Space |
+|------|------|-------|
+| [`PeakElement.java`](BinarySearch/PeakElement.java) | O(log n) | O(1) |
+
+**Tell the interviewer:** "I'll use binary search comparing mid with its right neighbor. If `nums[mid] > nums[mid+1]`, the peak is in the left half (including mid). Otherwise, it's in the right half. This works because array boundaries are considered -infinity."
+
+### 37. Single Element in a Sorted Array
+
+| File | Time | Space |
+|------|------|-------|
+| [`SingleElementSortedArray.java`](BinarySearch/SingleElementSortedArray.java) | O(log n) | O(1) |
+
+**Tell the interviewer:** "Before the single element, pairs are at (even, odd) indices. After it, pairs are at (odd, even) indices. I'll use binary search and check the parity-based pairing pattern to identify which half contains the single element."
+
+### 38. Median of Two Sorted Arrays
+
+| File | Time | Space |
+|------|------|-------|
+| [`MedianTwoSortedArrays.java`](BinarySearch/MedianTwoSortedArrays.java) | O(log(min(n,m))) | O(1) |
+
+**Tell the interviewer:** "I'll perform binary search on the smaller array to partition both arrays into left and right halves. A valid partition satisfies `maxLeft <= minRight` for both arrays. Once found, the median is the max of left halves or the average of max left and min right."
+
+### 39. Kth Element of Two Sorted Arrays
+
+| File | Time | Space |
+|------|------|-------|
+| [`KthElementTwoSortedArrays.java`](BinarySearch/KthElementTwoSortedArrays.java) | O(log(min(n,m))) | O(1) |
+
+**Tell the interviewer:** "This is similar to finding the median. I'll binary search on the smaller array to take a certain number of elements from each array such that the kth element is just at the partition. The valid partition gives me the kth element as the max of the left halves."
+
+### 40. Allocate Minimum Number of Pages
+
+| File | Time | Space |
+|------|------|-------|
+| [`AllocatePages.java`](BinarySearch/AllocatePages.java) | O(n log sum) | O(1) |
+
+**Tell the interviewer:** "I'll use binary search on the answer. The minimum possible max pages is at least the largest book, and at most the sum of all books. For each mid value, I'll check if it's feasible to allocate books to all students without exceeding mid pages per student."
+
+### 41. Aggressive Cows
+
+| File | Time | Space |
+|------|------|-------|
+| [`AggressiveCows.java`](BinarySearch/AggressiveCows.java) | O(n log maxDist) | O(1) |
+
+**Tell the interviewer:** "I'll sort the stalls and use binary search on the minimum distance between cows. For each candidate distance, I'll greedily place cows starting from the first stall. If I can place all cows with at least that distance, I'll try a larger distance."
+
+### 42. Nth Root of a Number
+
+| File | Time | Space |
+|------|------|-------|
+| [`NthRoot.java`](BinarySearch/NthRoot.java) | O(log m × n) | O(1) |
+
+**Tell the interviewer:** "I'll use binary search between 1 and m. For each mid, I'll compute mid^n and compare with m. If `mid^n <= m`, I'll try a larger value; otherwise, a smaller one. I'll return the largest integer x such that `x^n <= m`."
+
+---
+
 ## 📊 Quick Reference — Time & Space Complexities
 
 | Problem | Time Complexity | Space Complexity | Key Technique |
@@ -331,6 +516,27 @@
 | Median from Stream | O(log n) | O(n) | Two heaps |
 | Merge K Sorted Lists | O(n log k) | O(k) | Min-heap of heads |
 | Top K Frequent Words | O(n log k) | O(n) | Freq map + min-heap |
+| Reverse Words | O(n) | O(n) | Reverse entire + reverse words |
+| Longest Palindromic Substring | O(n²) | O(1) | Expand around center |
+| Roman to Integer | O(n) | O(1) | HashMap + subtractive |
+| Integer to Roman | O(1) | O(1) | Greedy value-symbol mapping |
+| Atoi | O(n) | O(1) | Digit parsing + overflow check |
+| Longest Common Prefix | O(S) | O(1) | Horizontal scanning |
+| Z-Function | O(n + m) | O(n + m) | Z-array pattern matching |
+| KMP Algorithm | O(n + m) | O(m) | LPS array + skipping |
+| Min Chars for Palindrome | O(n) | O(n) | LPS + concatenation |
+| Rotation Check | O(n) | O(n) | s1+s1 contains check |
+| Compare Version | O(n + m) | O(1) | Two-pointer segment parsing |
+| Repeated String Match | O(n + m) | O(m) | Repetition + substring check |
+| Search Rotated Sorted Array | O(log n) | O(1) | Modified binary search |
+| First/Last Position | O(log n) | O(1) | Two binary searches |
+| Peak Element | O(log n) | O(1) | Binary search on slope |
+| Single Element in Sorted Array | O(log n) | O(1) | Parity-based binary search |
+| Median Two Sorted Arrays | O(log(min(n,m))) | O(1) | Partition + binary search |
+| Kth Element Two Sorted Arrays | O(log(min(n,m))) | O(1) | Partition + binary search |
+| Allocate Pages | O(n log sum) | O(1) | Binary search on answer |
+| Aggressive Cows | O(n log maxDist) | O(1) | Binary search + greedy check |
+| Nth Root | O(log m × n) | O(1) | Binary search + power check |
 
 ---
 
