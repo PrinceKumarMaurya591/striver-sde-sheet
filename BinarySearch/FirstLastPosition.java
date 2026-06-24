@@ -6,24 +6,28 @@ public class FirstLastPosition {
 
     public static void main(String[] args) {
         FirstLastPosition fl = new FirstLastPosition();
-        int[] nums = {5, 7, 7, 8, 8, 10};
+        int[] nums = { 5, 7, 7, 8, 8, 10 };
         int target = 8;
         int[] result = fl.searchRange(nums, target);
         System.out.println("First: " + result[0] + ", Last: " + result[1]); // Output: First: 3, Last: 4
     }
 
     // Function to find the first and last position of a target in a sorted array
-    // The function takes a sorted array and a target as input and returns an array [first, last] of indices
+    // The function takes a sorted array and a target as input and returns an array
+    // [first, last] of indices
     // The function uses two separate binary searches to solve the problem
-    // The time complexity of the function is O(log n), where n is the length of the array. The space complexity is O(1) as we are using a constant amount of extra space.
+    // The time complexity of the function is O(log n), where n is the length of the
+    // array. The space complexity is O(1) as we are using a constant amount of
+    // extra space.
 
     // Approach: Perform two separate binary searches.
     // First binary search: Find the first occurrence of the target (lower bound).
     // Second binary search: Find the last occurrence of the target (upper bound).
-    // In both searches, when we find the target, we continue searching in the appropriate direction
+    // In both searches, when we find the target, we continue searching in the
+    // appropriate direction
     // to find the boundary instead of stopping immediately.
     public int[] searchRange(int[] nums, int target) {
-        int[] result = {-1, -1}; // Default result if target is not found
+        int[] result = { -1, -1 }; // Default result if target is not found
 
         result[0] = findFirst(nums, target); // Find the first occurrence
         if (result[0] != -1) { // If the target exists, find the last occurrence

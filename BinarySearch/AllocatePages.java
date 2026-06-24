@@ -4,20 +4,26 @@ public class AllocatePages {
 
     public static void main(String[] args) {
         AllocatePages ap = new AllocatePages();
-        int[] books = {12, 34, 67, 90};
+        int[] books = { 12, 34, 67, 90 };
         int students = 2;
         System.out.println(ap.allocateBooks(books, students)); // Output: 113
     }
 
-    // Function to find the minimum possible maximum number of pages allocated to a student
-    // The function takes an array of book pages and a number of students as input and returns the minimum possible maximum pages
+    // Function to find the minimum possible maximum number of pages allocated to a
+    // student
+    // The function takes an array of book pages and a number of students as input
+    // and returns the minimum possible maximum pages
     // The function uses a binary search approach on the answer to solve the problem
-    // The time complexity of the function is O(n log sum), where n is the number of books and sum is the total number of pages. The space complexity is O(1) as we are using a constant amount of extra space.
+    // The time complexity of the function is O(n log sum), where n is the number of
+    // books and sum is the total number of pages. The space complexity is O(1) as
+    // we are using a constant amount of extra space.
 
     // Approach: The answer lies between max(books) and sum(books).
     // Use binary search to find the minimum possible maximum pages.
-    // For each mid value, check if it is feasible to allocate books to all students such that no student gets more than mid pages.
-    // If feasible, try a smaller maximum (move right = mid - 1). Otherwise, try a larger maximum (move left = mid + 1).
+    // For each mid value, check if it is feasible to allocate books to all students
+    // such that no student gets more than mid pages.
+    // If feasible, try a smaller maximum (move right = mid - 1). Otherwise, try a
+    // larger maximum (move left = mid + 1).
     public int allocateBooks(int[] books, int students) {
         if (students > books.length) { // If there are more students than books, allocation is impossible
             return -1;
@@ -47,7 +53,8 @@ public class AllocatePages {
         return result;
     }
 
-    // Helper function to check if it is feasible to allocate books with a given maximum pages per student
+    // Helper function to check if it is feasible to allocate books with a given
+    // maximum pages per student
     private boolean isFeasible(int[] books, int students, int maxPages) {
         int studentCount = 1; // Start with the first student
         int currentPages = 0; // Pages assigned to the current student
